@@ -3,6 +3,7 @@ var Queue = function() {
   // but try not not reference your old code in writing the new style.
   var someInstance = {};
   extend(someInstance, queueMethods);
+  someInstance.storage = {};
   someInstance.count = 0;
   someInstance.lowestCount = 0;
   someInstance.magnitude = 0;
@@ -10,14 +11,20 @@ var Queue = function() {
 };
 
 var queueMethods = {
-  enqueue: function() {
+  enqueue: function(value) {
+    this.storage[this.count] = value;
+    this.count++;
     this.magnitude++;
   },
   dequeue: function() {
+    var dequeued = this.storage[this.lowestCount];
+    delete this.storage[this.lowestCount];
+    this.lowestCount++;
     this.magnitude--;
     if (this.magnitude < 0) {
       this.magnitude = 0;
     }
+    return dequeued;
   },
   size: function() {
     return this.magnitude;
