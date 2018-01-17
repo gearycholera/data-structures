@@ -8,9 +8,13 @@ var Stack = function() {
 };
 
 var stackMethods = {
+  push: function() {
+    return this.count++;
+  },
   size: function() {
     return this.count;
   }
+
 };
 
 var extend = function(to, from) {
