@@ -10,6 +10,15 @@ var Queue = function() {
 };
 
 var queueMethods = {
+  enqueue: function() {
+    this.magnitude++;
+  },
+  dequeue: function() {
+    this.magnitude--;
+    if (this.magnitude < 0) {
+      this.magnitude = 0;
+    }
+  },
   size: function() {
     return this.magnitude;
   }
