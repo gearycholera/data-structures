@@ -3,21 +3,22 @@
 // Instantiate a new graph
 var Graph = function() {
   this.edges = {};
+  this.storage = {};
 };
 
 // Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node) {
-  this[node] = node;
+  this.storage[node] = node;
 };
 
 // Return a boolean value indicating if the value passed to contains is represented in the graph.
 Graph.prototype.contains = function(node) {
-  return this[node] ? true : false;
+  return this.storage[node] ? true : false;
 };
 
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
-  delete this[node];
+  delete this.storage[node];
   for (var key in this.edges) {
     if (this.edges[key].includes(node)) {
       delete this.edges[key];
@@ -46,8 +47,9 @@ Graph.prototype.removeEdge = function(fromNode, toNode) {
 
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
-  for (var key in this) {
-    cb(this[key]);
+  for (var key in this.storage) {
+    console.log(this.storage[key]);
+    cb(this.storage[key]);
   }
 };
 
