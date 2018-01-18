@@ -48,6 +48,7 @@ var LinkedList = function() {
       return true;
     }
     return false;
+    // comments
     // first assign var currentNode to list.head
     // create a while loop (currentNode.next)
     // if currentNode.value = target
