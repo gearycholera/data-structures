@@ -23,5 +23,13 @@ describe('set', function() {
     set.remove('Mel Gibson');
     expect(set.contains('Mel Gibson')).to.equal(false);
   });
+  
+  it('should not have duplicates', function() {
+    set.add('Giri Kalra');
+    set.add('Carlton Caven');
+    set.add('Giri Kalra');
+    set.add('Carlton Caven');
+    expect(JSON.stringify(set)).to.include('{"Giri Kalra":"Giri Kalra","Carlton Caven":"Carlton Caven"}}');
+  });
 
 });

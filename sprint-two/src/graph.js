@@ -52,6 +52,14 @@ Graph.prototype.forEachNode = function(cb) {
   }
 };
 
+Graph.prototype.size = function() {
+  var count = 0;
+  for (var key in this.storage) {
+    count++;
+  }
+  return count;
+};
+
 /*
  * Complexity: What is the time complexity of the above functions?
   // addNode: O(1)

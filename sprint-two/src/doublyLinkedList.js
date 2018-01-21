@@ -1,4 +1,4 @@
-var LinkedList = function() {
+var DoublyLinkedList = function() {
   var list = {};
   list.head = null;
   list.tail = null;
@@ -11,29 +11,58 @@ var LinkedList = function() {
       list.tail = node;
     } else {
       list.tail.next = node;
+      // if .next assigned .previous needs to point at the previous node
+      // save list.tail into temp variable
+      var temp = list.tail;
       list.tail = node;
+      node.previous = temp;
+      // list.tail.previous = temp variable
     }
     // if list is empty
     // head & tail becomes NewNode
     // else the current tails next property becomes the NewNode & NewNode becomes the tail
   };
 
+  list.addToHead = function(value) {
+    var node = Node(value);
+    if (list.head === null && list.tail === null) {
+      list.head = node;
+      list.tail = node;
+    } else if (list.head !== undefined) {
+      list.head.previous = node;
+      node.next = list.head;
+      list.head = node;
+    }
+  };
+
+  list.removeTail = function() {
+    if (list.head === null && list.tail === null) {
+      return 'can\'t remove tail from empty list';
+    } else {
+      var oldTailValue = list.tail.value;
+      var tempPrev = list.tail.previous;
+      delete list.tail;
+      list.tail = tempPrev;
+      return oldTailValue;
+    }
+  };
+
   list.removeHead = function() {
     if (list.head === null && list.tail === null) {
       return 'can\'t remove head from empty list';
     } else {
-      var newHeadValue = list.head.value;
+      var oldHeadValue = list.head.value;
       var tempNext = list.head.next;
       delete list.head;
       list.head = tempNext;
-      return newHeadValue;
+      return oldHeadValue;
     }
     // if list empty return undefined
-    // else find the current list.head and assign var newHeadValue to store its list.head.value
+    // else find the current list.head and assign var oldHeadValue to store its list.head.value
     // find the current list.head.next and assign it to a different temp variable
     // delete current list.head
     // assign list.head to different temp variable
-    // return newHeadValue;
+    // return oldHeadValue;
   };
 
   list.contains = function(target) {
@@ -68,7 +97,7 @@ var Node = function(value) {
 
   node.value = value;
   node.next = null;
-
+  node.previous = null;
   return node;
 };
 

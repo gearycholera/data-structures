@@ -5,7 +5,7 @@ describe('graph', function() {
     graph = new Graph();
   });
 
-  it('should have methods named "addNode", "contains", "removeNode", "addEdge", "hasEdge", "removeEdge" and "forEachNode"', function() {
+  it('should have methods named "addNode", "contains", "removeNode", "addEdge", "hasEdge", "removeEdge", "forEachNode" and "size"', function() {
     expect(graph.addNode).to.be.a('function');
     expect(graph.contains).to.be.a('function');
     expect(graph.removeNode).to.be.a('function');
@@ -13,6 +13,7 @@ describe('graph', function() {
     expect(graph.addEdge).to.be.a('function');
     expect(graph.removeEdge).to.be.a('function');
     expect(graph.forEachNode).to.be.a('function');
+    expect(graph.size).to.be.a('function');
   });
 
   it('should store values as nodes that were inserted', function() {
@@ -67,5 +68,13 @@ describe('graph', function() {
     expect(graph.hasEdge(1, 5)).to.equal(true);
     expect(graph.hasEdge(3, 5)).to.equal(true);
     expect(graph.hasEdge(5, 5)).to.equal(true);
+  });
+
+  it('should return count of total nodes in the graph', function() {
+    graph.addNode(5);
+    graph.addNode(2);
+    graph.addNode(1);
+    graph.addNode(3);
+    expect(graph.size()).to.equal(4);
   });
 });
